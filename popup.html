@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root{
+      --text-color:#2c3e50;
+      --text-secondary:#7f8c8d;
+      --border-color:#ecf0f1;
+      --background-color:#ffffff;
+    }
+    body{
+      width: 280px;
+      color: var(--text-color);
+      background: var(--background-color);
+    }
+    .header{
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .title{
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .links-section{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 6px 12px;
+      background-color: #f5f7f8;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .content{
+      padding: 12px;
+    }
+    .shared-code-section{
+      margin-bottom: 12px;
+      padding: 8px;
+      border:1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #f8f9fa;
+    }
+    .shared-code-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .shared-code-title{
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .shared-code-remaining{
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .shared-code-content{
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 8px;
+    }
+    .shared-code-display{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .use-shared-code-btn{
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #fff;
+      background: black;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .use-shared-code-btn:hover{
+      background: rgb(113, 113, 113);
+    }
+    .shared-code-hint{
+      font-size: 11px;
+      color: rgb(243, 178, 143);
+    }
+    .liscense-section{
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #f8f9fa;
+    }
+    .license-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .license-title{
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .remaining-count{
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .license-input-group{
+      display: flex;
+      gap: 8px;
+    }
+    .license-input{
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      outline: none;
+    }
+    .license-input:disabled{
+      background-color: #f8f9fa;
+      color: var(--text-secondary);
+    }
+    .license-button{
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-color);
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .license-button:hover{
+      background: #f8f9fa;
+    }
+    .role-section{
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #f8f9fa;
+    }
+    .role-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .role-title{
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .role-grid{
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 6px;
+    }
+    .role-item{
+      padding: 6px 4px;
+      font-size: 12px;
+      color: var(--text-color);
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition:  all 0.2s;
+    }
+    .role-item:hover{
+      background: #f8f9fa;
+    }
+    .role-item.active{
+      background: var(--text-color);
+      color: white;
+      border: var(--text-color);
+    }
+    .custom-prompt-section{
+      margin-bottom: 12px;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: #f8f9fa;
+    }
+    .custom-prompt-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .custom-prompt-title{
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .custom-prompt-content{
+      background: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 8px;
+    }
+    .custom-prompt-input{
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      outline: none;
+      height: 60px;
+      resize: vertical;
+      box-sizing: border-box;
+
+    }
+    .custom-prompt-hint{
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-color);
+    }
+    .feature-section{
+      margin-bottom: 12px;
+    }
+    .feature-section:last-child{
+      margin-bottom: 0;
+    }
+    .section-title{
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0 0 6px 0;
+      color: var(--text-color);
+    }
+    .instruction{
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .instruction ol{
+      margin: 4px 0;
+      padding-left: 18px;
+    }
+    .instruction li{
+      margin-bottom: 2px;
+    }
+    .shortcut{
+      background-color: var(--background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+    .shortcut-item{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .shortcut-key{
+      cursor: pointer;
+      background: var(--background-color);
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      border: 1px solid var(--border-color);
+    }
+    .switch-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .switch-label{
+      font-size: 12px;
+
+    }
+    .get-private-code-btn{
+      width: 100%;
+      margin-top: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: white;
+      background: black;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">
+      AI智能助手
+    </div>
+  </div>
+  <div class="links-section">
+    <a href="">使用教程</a>
+    <a href="">建议留言</a>
+    <a href="">最新消息</a>
+  </div>
+  <div class="content">
+    <!-- 今日共享码区域 -->
+     <div class="shared-code-section">
+      <div class="shared-code-header">
+        <span class="shared-code-title">进入共享码</span>
+        <span class="shared-code-remaining" id="shared-code-remaining"></span>
+       </div>
+       <div class="shared-code-content">
+        <div class="shared-code-display" id="shared-code-display">
+          <span id="shared-code-value">加载中...</span>
+          <button id="use-shared-code" class="use-shared-code-btn" style="display: none;">使用</button>
+        </div>
+        <div class="shared-code-hint">共享码可能会被很多人使用，建议使用私人使用码</div>
+       </div>
+     </div>
+     <div class="liscense-section">
+      <div class="license-header">
+        <span class="license-title">使用码</span>
+        <span class="remaining-count" id="remaining-count"></span>
+      </div>
+      <div class="license-input-group">
+        <input type="text" class="license-input" id="license-input" placeholder="请输入使用码">
+        <button class="license-button" id="license-button">确认</button>
+      </div>
+      <!-- <button class="get-private-code-btn" id="get-private-code">获取私人使用码</button> -->
+     </div>
+     <div class="role-section">
+      <div class="role-header">
+        <span class="role-title">回复风格</span>
+      </div>
+      <div class="role-grid">
+        <div class="role-item" data-role="professional">专业</div>
+        <div class="role-item" data-role="humorous">诙谐</div>
+        <div class="role-item" data-role="casual">随性</div>
+      </div>
+     </div>
+     <div class="custom-prompt-section">
+      <div class="custom-prompt-header">
+        <span class="custom-prompt-title">个性化设置</span>
+      </div>
+      <div class="custom-prompt-content">
+        <textarea id="custom-prompt" class="custom-prompt-input" placeholder="请输入你的个性化设置"></textarea>
+        <div class="custom-prompt-hint">这些信息将作为额外提示发送给AI</div>
+      </div>
+     </div>
+     <div class="feature-section">
+      <h2 class="section-title">回复推荐功能</h2>
+      <div class="instruction">
+        <ol>
+          <li>选择需要回复的文本</li>
+          <li>按下快捷键</li>
+        </ol>
+        <div class="shortcut">
+          <div class="shortcut-item">
+            <span>回复推荐</span>
+            <span class="shortcut-key" id="get-replay-shortcut">未设置</span>
+          </div>
+        </div>
+      </div>
+     </div>
+
+     <div class="feature-section">
+      <h2 class="section-title">文本优化功能</h2>
+      <div class="instruction">
+        <ol>
+          <li>在输入框输入或编辑文本</li>
+          <li>按下快捷键优化当前文本</li>
+        </ol>
+        <div class="shortcut">
+          <div class="shortcut-item">
+            <span>优化文本</span>
+            <span class="shortcut-key" id="optimize-text-shortcut">未设置</span>
+          </div>
+        </div>
+      </div>
+     </div>
+     <div class="feature-section">
+      <h2 class="section-title">复制功能</h2>
+      <div class="instruction">
+        <ol>
+          <li>按下快捷键复制当前回复</li>
+          <li>如果开启自动粘贴，当焦点在输入框上，会自动填入输入框</li>
+        </ol>
+        <div class="shortcut">
+          <div class="shortcut-item">
+            <span>复制回复</span>
+            <span class="shortcut-key" id="copy-reply-shortcut">未设置</span>
+          </div>
+        </div>
+        <div class="switch-container">
+          <span class="switch-label">自动粘贴</span>
+          <label  class="switch">
+            <input type="checkbox" id="auto-paste-switch" checked >
+          </label>
+        </div>
+      </div>
+     </div>
+  </div>
+</body>
+</html>
+<script src="popup.js"></script>

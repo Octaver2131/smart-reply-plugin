@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "SmartReply",
+  "version": "1.0.0",
+  "description": "智能回复助手",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "get-ai-reply": {
+      "suggested_key": {
+        "default": "Alt+1"
+      },
+      "description": "回复推荐"
+    },
+    "optimize-text": {
+      "suggested_key": {
+        "default": "Alt+2"
+      },
+      "description": "优化文本"
+    },
+    "copy-ai-reply": {
+      "suggested_key": {
+        "default": "Alt+3"
+      },
+      "description": "复制文本"
+    }
+  }
+}
